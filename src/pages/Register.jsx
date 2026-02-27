@@ -70,18 +70,14 @@ const Register = () => {
                         {/* Avatar Upload */}
                         <div className="flex justify-center mb-2">
                             <div className="text-center">
-                                <input ref={avatarInputRef} type="file" accept="image/*" onChange={handleAvatarChange} className="hidden" />
-                                <button
-                                    type="button"
-                                    onClick={() => avatarInputRef.current?.click()}
-                                    className={`w-20 h-20 rounded-full overflow-hidden border-2 border-dashed ${avatarPreview ? 'border-primary' : 'border-[var(--color-border)]'} flex items-center justify-center bg-[var(--color-surface)] hover:border-primary active:border-primary active:bg-primary/5 transition-colors mx-auto`}
-                                >
+                                <label className={`w-20 h-20 rounded-full overflow-hidden border-2 border-dashed ${avatarPreview ? 'border-primary' : 'border-[var(--color-border)]'} flex items-center justify-center bg-[var(--color-surface)] hover:border-primary active:border-primary active:bg-primary/5 transition-colors mx-auto cursor-pointer`}>
+                                    <input type="file" accept="image/*" onChange={handleAvatarChange} className="hidden" />
                                     {avatarPreview ? (
                                         <img src={avatarPreview} alt="Avatar" className="w-full h-full object-cover" />
                                     ) : (
                                         <HiPhotograph className="text-[var(--color-text-muted)]" size={28} />
                                     )}
-                                </button>
+                                </label>
                                 <span className="block text-center text-[11px] text-[var(--color-text-muted)] mt-1.5">Tap to Upload Photo</span>
                             </div>
                         </div>

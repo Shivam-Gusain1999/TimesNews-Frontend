@@ -82,14 +82,10 @@ const Profile = () => {
                 {user?.coverImage && (
                     <img src={user.coverImage} alt="Cover" className="absolute inset-0 w-full h-full object-cover" />
                 )}
-                <input ref={coverInputRef} type="file" accept="image/*" onChange={handleCoverUpdate} className="hidden" />
-                <button
-                    type="button"
-                    onClick={() => coverInputRef.current?.click()}
-                    className="absolute bottom-3 right-3 p-2.5 bg-black/50 backdrop-blur-sm rounded-lg text-white active:bg-black/80 hover:bg-black/70 transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center"
-                >
+                <label className="absolute bottom-3 right-3 p-2.5 bg-black/50 backdrop-blur-sm rounded-lg text-white active:bg-black/80 hover:bg-black/70 transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center cursor-pointer">
+                    <input type="file" accept="image/*" onChange={handleCoverUpdate} className="hidden" />
                     <HiCamera size={20} />
-                </button>
+                </label>
             </div>
 
             {/* Avatar + Name */}
@@ -100,14 +96,10 @@ const Profile = () => {
                         alt={user?.fullName}
                         className="w-20 h-20 sm:w-24 sm:h-24 rounded-full object-cover border-4 border-[var(--color-surface)] shadow-lg"
                     />
-                    <input ref={avatarInputRef} type="file" accept="image/*" onChange={handleAvatarUpdate} className="hidden" />
-                    <button
-                        type="button"
-                        onClick={() => avatarInputRef.current?.click()}
-                        className="absolute bottom-0 right-0 p-2 bg-primary rounded-full text-white active:bg-primary-dark hover:bg-primary-dark transition-colors shadow-md min-w-[32px] min-h-[32px] flex items-center justify-center"
-                    >
+                    <label className="absolute bottom-0 right-0 p-2 bg-primary rounded-full text-white active:bg-primary-dark hover:bg-primary-dark transition-colors shadow-md min-w-[32px] min-h-[32px] flex items-center justify-center cursor-pointer">
+                        <input type="file" accept="image/*" onChange={handleAvatarUpdate} className="hidden" />
                         <HiCamera size={14} />
-                    </button>
+                    </label>
                 </div>
                 <div className="mb-1 sm:mb-2 min-w-0">
                     <h1 className="text-lg sm:text-xl font-bold text-[var(--color-text-primary)] truncate">{user?.fullName}</h1>
