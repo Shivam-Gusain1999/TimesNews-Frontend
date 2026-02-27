@@ -77,8 +77,8 @@ const Navbar = () => {
 
     return (
         <header
-            // MAROON CHANGE: bg-red-800 (Mehroon) instead of red-950
-            className={`sticky top-0 z-50 transition-all duration-300 bg-red-800 text-white shadow-md border-b border-red-700`}
+            // Adjusted Red background to be slightly darker/more premium
+            className="sticky top-0 z-50 transition-all duration-300 bg-[#a11d20] text-white shadow-md border-b border-red-900"
         >
             {/* Top Bar - Slate-900 (Dark Blue for contrast) */}
             <div className="bg-slate-900 text-white/90 border-b border-white/10">
@@ -105,12 +105,12 @@ const Navbar = () => {
                     {/* Logo */}
                     <Link to="/" className="flex items-center gap-3 shrink-0 group">
                         {/* Logo Box White for Contrast */}
-                        <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center shadow-lg group-hover:bg-gray-100 transition-colors">
-                            {/* Text Color changed to red-800 to match theme */}
-                            <span className="text-red-800 font-bold text-xl font-[var(--font-serif)]">T</span>
+                        <div className="w-8 h-8 sm:w-10 sm:h-10 bg-white rounded-lg flex items-center justify-center shadow-lg group-hover:bg-gray-100 transition-colors">
+                            {/* Text Color changed to match background */}
+                            <span className="text-[#a11d20] font-bold text-lg sm:text-xl font-[var(--font-serif)]">T</span>
                         </div>
-                        <div className="hidden sm:block">
-                            <h1 className="text-2xl font-bold font-[var(--font-serif)] text-white leading-none tracking-tight">
+                        <div>
+                            <h1 className="text-[17px] sm:text-2xl font-bold font-[var(--font-serif)] text-white leading-none tracking-tight whitespace-nowrap">
                                 Times News
                             </h1>
                         </div>
@@ -216,9 +216,9 @@ const Navbar = () => {
                     </div>
                 </div>
 
-                {/* Search Bar - Expandable (Updated BG to red-800) */}
+                {/* Search Bar - Expandable */}
                 {showSearch && (
-                    <div className="py-4 border-t border-red-700 animate-fade-in relative bg-red-800">
+                    <div className="py-4 border-t border-red-900 animate-fade-in relative bg-[#a11d20]">
                         <form onSubmit={handleSearch} className="relative max-w-xl mx-auto">
                             <HiSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500" size={18} />
                             <input
@@ -274,9 +274,9 @@ const Navbar = () => {
                 )}
             </div>
 
-            {/* Mobile Menu (Updated BG to red-800) */}
+            {/* Mobile Menu */}
             {isOpen && (
-                <div className="lg:hidden border-t border-red-700 bg-red-800 animate-fade-in text-white">
+                <div className="lg:hidden border-t border-red-900 bg-[#a11d20] animate-fade-in text-white shadow-inner">
                     <nav className="max-w-7xl mx-auto px-4 py-4 space-y-1">
                         <Link to="/" onClick={() => setIsOpen(false)} className={`block px-4 py-2.5 rounded-lg text-sm font-medium transition-colors ${isActive('/') ? 'bg-red-900 text-white' : 'text-red-100 hover:text-white hover:bg-red-900'}`}>
                             Home

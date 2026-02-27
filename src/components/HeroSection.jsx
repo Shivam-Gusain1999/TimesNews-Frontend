@@ -14,18 +14,19 @@ const HeroSection = ({ article }) => {
     return (
         <section className="relative overflow-hidden rounded-xl sm:rounded-2xl group">
             <Link to={`/article/${article.slug}`} className="block">
-                {/* Background Image */}
-                <div className="relative h-[280px] sm:h-[400px] md:h-[500px]">
+                {/* Background Image Container */}
+                <div className="relative h-[320px] sm:h-[400px] md:h-[500px] bg-slate-900">
                     <img
                         src={article.thumbnail}
                         alt={article.title}
-                        className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                        className="absolute inset-0 w-full h-full object-cover sm:object-center object-top group-hover:scale-105 transition-transform duration-700 opacity-90"
+                        onError={(e) => { e.target.src = 'https://placehold.co/800x500/1a1a2e/ffffff?text=Times+News'; }}
                     />
-                    {/* Gradient Overlay — stronger on mobile for readability */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/50 to-transparent sm:from-black/90 sm:via-black/40" />
+                    {/* Gradient Overlay — carefully tuned for readability without hiding the image */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent sm:from-black/90 sm:via-black/30" />
 
                     {/* Content */}
-                    <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 md:p-10">
+                    <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-6 md:p-10 z-10">
                         <div className="flex items-center gap-2 sm:gap-3 mb-2 sm:mb-3 flex-wrap">
                             <span className="px-2.5 sm:px-3 py-1 bg-primary text-white text-[10px] sm:text-xs font-bold uppercase tracking-wider rounded-md">
                                 {article.category?.name || 'Breaking News'}
