@@ -38,16 +38,16 @@ const Contact = () => {
                     <div className="grid md:grid-cols-2 gap-5">
                         <div>
                             <label className="block text-sm font-medium text-[var(--color-text-secondary)] mb-1.5">Name</label>
-                            <input name="name" value={formData.name} onChange={handleChange} type="text" required className="w-full px-4 py-2.5 bg-[var(--color-surface)] border border-[var(--color-border)] rounded-xl text-sm text-[var(--color-text-primary)] focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all" placeholder="Your name" />
+                            <input name="name" value={formData.name} onChange={handleChange} type="text" required className="w-full px-4 py-3 bg-[var(--color-surface)] border border-[var(--color-border)] rounded-xl text-base text-[var(--color-text-primary)] focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all" placeholder="Your name" />
                         </div>
                         <div>
                             <label className="block text-sm font-medium text-[var(--color-text-secondary)] mb-1.5">Email</label>
-                            <input name="email" value={formData.email} onChange={handleChange} type="email" required className="w-full px-4 py-2.5 bg-[var(--color-surface)] border border-[var(--color-border)] rounded-xl text-sm text-[var(--color-text-primary)] focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all" placeholder="you@example.com" />
+                            <input name="email" value={formData.email} onChange={handleChange} type="email" required className="w-full px-4 py-3 bg-[var(--color-surface)] border border-[var(--color-border)] rounded-xl text-base text-[var(--color-text-primary)] focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all" placeholder="you@example.com" />
                         </div>
                     </div>
                     <div>
                         <label className="block text-sm font-medium text-[var(--color-text-secondary)] mb-1.5">Subject</label>
-                        <select name="subject" value={formData.subject} onChange={handleChange} className="w-full px-4 py-2.5 bg-[var(--color-surface)] border border-[var(--color-border)] rounded-xl text-sm text-[var(--color-text-primary)] focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all">
+                        <select name="subject" value={formData.subject} onChange={handleChange} className="w-full px-4 py-3 bg-[var(--color-surface)] border border-[var(--color-border)] rounded-xl text-base text-[var(--color-text-primary)] focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all">
                             <option value="General Inquiry">General Inquiry</option>
                             <option value="Editorial Feedback">Editorial Feedback</option>
                             <option value="Technical Support">Technical Support</option>
@@ -56,7 +56,7 @@ const Contact = () => {
                     </div>
                     <div>
                         <label className="block text-sm font-medium text-[var(--color-text-secondary)] mb-1.5">Message</label>
-                        <textarea name="message" value={formData.message} onChange={handleChange} required rows="5" className="w-full px-4 py-2.5 bg-[var(--color-surface)] border border-[var(--color-border)] rounded-xl text-sm text-[var(--color-text-primary)] focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all resize-none" placeholder="How can we help?"></textarea>
+                        <textarea name="message" value={formData.message} onChange={handleChange} required rows="5" className="w-full px-4 py-3 bg-[var(--color-surface)] border border-[var(--color-border)] rounded-xl text-base text-[var(--color-text-primary)] focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all resize-none" placeholder="How can we help?"></textarea>
                     </div>
                     <button
                         type="submit"

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import toast from 'react-hot-toast';
@@ -14,6 +14,7 @@ const Register = () => {
     const [loading, setLoading] = useState(false);
     const { register } = useAuth();
     const navigate = useNavigate();
+    const avatarInputRef = useRef(null);
 
     const handleAvatarChange = (e) => {
         const file = e.target.files[0];
@@ -49,7 +50,7 @@ const Register = () => {
         }
     };
 
-    const inputClass = "w-full pl-11 pr-4 py-2.5 bg-[var(--color-surface)] border border-[var(--color-border)] rounded-xl text-sm text-[var(--color-text-primary)] placeholder:text-[var(--color-text-muted)] focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all";
+    const inputClass = "w-full pl-11 pr-4 py-3 bg-[var(--color-surface)] border border-[var(--color-border)] rounded-xl text-base text-[var(--color-text-primary)] placeholder:text-[var(--color-text-muted)] focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all";
 
     return (
         <div className="min-h-[80vh] flex items-center justify-center px-4 py-12">
@@ -68,17 +69,21 @@ const Register = () => {
                     <form onSubmit={handleSubmit} className="space-y-4">
                         {/* Avatar Upload */}
                         <div className="flex justify-center mb-2">
-                            <label className="cursor-pointer group relative">
-                                <div className={`w-20 h-20 rounded-full overflow-hidden border-2 border-dashed ${avatarPreview ? 'border-primary' : 'border-[var(--color-border)]'} flex items-center justify-center bg-[var(--color-surface)] group-hover:border-primary transition-colors`}>
+                            <div className="text-center">
+                                <input ref={avatarInputRef} type="file" accept="image/*" onChange={handleAvatarChange} className="hidden" />
+                                <button
+                                    type="button"
+                                    onClick={() => avatarInputRef.current?.click()}
+                                    className={`w-20 h-20 rounded-full overflow-hidden border-2 border-dashed ${avatarPreview ? 'border-primary' : 'border-[var(--color-border)]'} flex items-center justify-center bg-[var(--color-surface)] hover:border-primary active:border-primary active:bg-primary/5 transition-colors mx-auto`}
+                                >
                                     {avatarPreview ? (
                                         <img src={avatarPreview} alt="Avatar" className="w-full h-full object-cover" />
                                     ) : (
-                                        <HiPhotograph className="text-[var(--color-text-muted)] group-hover:text-primary transition-colors" size={28} />
+                                        <HiPhotograph className="text-[var(--color-text-muted)]" size={28} />
                                     )}
-                                </div>
-                                <input type="file" accept="image/*" onChange={handleAvatarChange} className="hidden" />
-                                <span className="block text-center text-[11px] text-[var(--color-text-muted)] mt-1.5">Upload Photo (Optional)</span>
-                            </label>
+                                </button>
+                                <span className="block text-center text-[11px] text-[var(--color-text-muted)] mt-1.5">Tap to Upload Photo</span>
+                            </div>
                         </div>
 
                         <div>
@@ -93,7 +98,7 @@ const Register = () => {
                             <label className="block text-sm font-medium text-[var(--color-text-secondary)] mb-1.5">Username</label>
                             <div className="relative">
                                 <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[var(--color-text-muted)] text-sm">@</span>
-                                <input type="text" value={formData.username} onChange={(e) => setFormData({ ...formData, username: e.target.value.toLowerCase() })} placeholder="johndoe" className="w-full pl-9 pr-4 py-2.5 bg-[var(--color-surface)] border border-[var(--color-border)] rounded-xl text-sm text-[var(--color-text-primary)] placeholder:text-[var(--color-text-muted)] focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all" />
+                                <input type="text" value={formData.username} onChange={(e) => setFormData({ ...formData, username: e.target.value.toLowerCase() })} placeholder="johndoe" className="w-full pl-9 pr-4 py-3 bg-[var(--color-surface)] border border-[var(--color-border)] rounded-xl text-base text-[var(--color-text-primary)] placeholder:text-[var(--color-text-muted)] focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all" />
                             </div>
                         </div>
 
@@ -114,7 +119,7 @@ const Register = () => {
                                     value={formData.password}
                                     onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                                     placeholder="Create a strong password"
-                                    className="w-full pl-11 pr-11 py-2.5 bg-[var(--color-surface)] border border-[var(--color-border)] rounded-xl text-sm text-[var(--color-text-primary)] placeholder:text-[var(--color-text-muted)] focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all"
+                                    className="w-full pl-11 pr-11 py-3 bg-[var(--color-surface)] border border-[var(--color-border)] rounded-xl text-base text-[var(--color-text-primary)] placeholder:text-[var(--color-text-muted)] focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all"
                                 />
                                 <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-3.5 top-1/2 -translate-y-1/2 text-[var(--color-text-muted)] hover:text-[var(--color-text-secondary)]">
                                     {showPassword ? <HiEyeOff size={18} /> : <HiEye size={18} />}
@@ -125,7 +130,7 @@ const Register = () => {
                         <button
                             type="submit"
                             disabled={loading}
-                            className="w-full py-2.5 bg-primary hover:bg-primary-dark text-white font-semibold rounded-xl transition-colors shadow-lg shadow-primary/20 disabled:opacity-50 disabled:cursor-not-allowed mt-2"
+                            className="w-full py-3 bg-primary hover:bg-primary-dark active:bg-primary-dark text-white font-semibold rounded-xl transition-colors shadow-lg shadow-primary/20 disabled:opacity-50 disabled:cursor-not-allowed mt-2 min-h-[48px]"
                         >
                             {loading ? (
                                 <span className="flex items-center justify-center gap-2">

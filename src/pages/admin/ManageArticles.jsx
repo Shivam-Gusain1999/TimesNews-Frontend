@@ -155,7 +155,7 @@ const ManageArticles = () => {
                     className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/60 backdrop-blur-sm animate-fade-in"
                     onClick={(e) => e.target === e.currentTarget && resetForm()}
                 >
-                    <div className="bg-white rounded-t-2xl sm:rounded-2xl shadow-2xl w-full sm:max-w-3xl max-h-[95vh] sm:max-h-[90vh] overflow-y-auto animate-scale-up">
+                    <div className="bg-white rounded-t-2xl sm:rounded-2xl shadow-2xl w-full sm:max-w-3xl max-h-[85vh] sm:max-h-[90vh] overflow-y-auto overscroll-y-none animate-scale-up pb-safe">
                         {/* Modal Header */}
                         <div className="sticky top-0 bg-white z-10 flex items-center justify-between p-4 sm:p-5 border-b border-gray-100">
                             <h2 className="text-base sm:text-lg font-bold text-gray-800">{editingId ? 'Edit Article' : 'Create New Article'}</h2>
@@ -247,7 +247,7 @@ const ManageArticles = () => {
 
                             {/* Actions — Stacked on mobile */}
                             <div className="flex flex-col-reverse sm:flex-row gap-3 pt-2 pb-4 sm:pb-2">
-                                <button type="button" onClick={resetForm} className="w-full sm:w-auto px-6 py-3.5 border border-gray-300 rounded-xl text-sm font-medium text-gray-600 hover:bg-gray-50 active:bg-gray-100 transition-colors min-h-[48px]">
+                                <button type="button" onClick={resetForm} className="w-full sm:w-auto px-6 py-3.5 border border-gray-300 rounded-xl text-sm font-medium text-gray-600 hover:bg-gray-50 active:bg-gray-100 transition-colors min-h-[48px] mb-2 sm:mb-0">
                                     Cancel
                                 </button>
                                 <button type="submit" disabled={submitting} className="flex-1 py-3.5 bg-slate-900 hover:bg-slate-800 active:bg-slate-700 text-white font-bold rounded-xl transition-all shadow-lg shadow-slate-900/20 disabled:opacity-70 disabled:cursor-not-allowed min-h-[48px]">

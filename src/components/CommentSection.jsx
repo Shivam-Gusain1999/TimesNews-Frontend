@@ -107,7 +107,7 @@ const CommentSection = ({ articleId }) => {
                                 <button
                                     type="submit"
                                     disabled={submitting || !content.trim()}
-                                    className="px-6 py-2 bg-primary text-white font-medium rounded-lg hover:bg-primary-dark transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                                    className="px-6 py-2.5 bg-primary text-white font-medium rounded-lg hover:bg-primary-dark active:bg-primary-dark transition-colors disabled:opacity-50 disabled:cursor-not-allowed min-h-[44px]"
                                 >
                                     {submitting ? 'Posting...' : 'Post Comment'}
                                 </button>
@@ -159,7 +159,7 @@ const CommentSection = ({ articleId }) => {
                                         {canDelete(comment) && (
                                             <button
                                                 onClick={() => handleDelete(comment._id)}
-                                                className="text-[var(--color-text-muted)] hover:text-red-500 transition-colors p-1 rounded opacity-0 group-hover:opacity-100"
+                                                className="text-[var(--color-text-muted)] hover:text-red-500 active:text-red-600 transition-colors p-2 rounded opacity-100 sm:opacity-0 sm:group-hover:opacity-100 min-w-[36px] min-h-[36px] flex items-center justify-center"
                                                 title="Delete Comment"
                                             >
                                                 <HiTrash size={16} />

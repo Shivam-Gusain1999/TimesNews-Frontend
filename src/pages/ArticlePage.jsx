@@ -91,7 +91,7 @@ const ArticlePage = () => {
             )}
 
             {/* Title */}
-            <h1 className="text-xl sm:text-3xl md:text-4xl font-bold font-[var(--font-serif)] text-[var(--color-text-primary)] leading-snug sm:leading-tight mb-4 sm:mb-5">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold font-[var(--font-serif)] text-[var(--color-text-primary)] leading-snug sm:leading-tight mb-4 sm:mb-5">
                 {article.title}
             </h1>
 
@@ -110,7 +110,7 @@ const ArticlePage = () => {
                         </div>
                     </div>
                 )}
-                <div className="flex items-center gap-4 text-sm text-[var(--color-text-muted)]">
+                <div className="flex flex-wrap items-center gap-3 text-sm text-[var(--color-text-muted)] mt-2 sm:mt-0">
                     <span className="flex items-center gap-1.5"><HiClock size={15} /> {formatDate(article.createdAt)}</span>
                     <span className="flex items-center gap-1.5"><HiEye size={15} /> {article.views?.toLocaleString()} views</span>
                 </div>

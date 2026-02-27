@@ -30,7 +30,7 @@ const ArticleCard = ({ article, variant = 'default' }) => {
                 <img
                     src={article.thumbnail}
                     alt={article.title}
-                    className="w-28 h-20 md:w-32 md:h-24 rounded-lg object-cover shrink-0 group-hover:scale-105 transition-transform duration-300"
+                    className="w-24 h-20 md:w-32 md:h-24 rounded-lg object-cover shrink-0 group-hover:scale-105 transition-transform duration-300"
                     loading="lazy"
                 />
                 <div className="flex flex-col justify-center min-w-0">
