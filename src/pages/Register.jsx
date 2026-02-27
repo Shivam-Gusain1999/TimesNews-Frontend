@@ -69,9 +69,9 @@ const Register = () => {
                     <form onSubmit={handleSubmit} className="space-y-4">
                         {/* Avatar Upload */}
                         <div className="flex justify-center mb-2">
-                            <div className="text-center">
-                                <label className={`w-20 h-20 rounded-full overflow-hidden border-2 border-dashed ${avatarPreview ? 'border-primary' : 'border-[var(--color-border)]'} flex items-center justify-center bg-[var(--color-surface)] hover:border-primary active:border-primary active:bg-primary/5 transition-colors mx-auto cursor-pointer`}>
-                                    <input type="file" accept="image/*" onChange={handleAvatarChange} className="hidden" />
+                            <div className="text-center flex flex-col items-center">
+                                <input id="register-avatar-upload" type="file" accept="image/jpeg, image/png, image/webp" onChange={handleAvatarChange} className="sr-only" />
+                                <label htmlFor="register-avatar-upload" className={`w-20 h-20 rounded-full overflow-hidden border-2 border-dashed ${avatarPreview ? 'border-primary' : 'border-[var(--color-border)]'} flex items-center justify-center bg-[var(--color-surface)] hover:border-primary active:border-primary active:bg-primary/5 transition-colors mx-auto cursor-pointer block`}>
                                     {avatarPreview ? (
                                         <img src={avatarPreview} alt="Avatar" className="w-full h-full object-cover" />
                                     ) : (

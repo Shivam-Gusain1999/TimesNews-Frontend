@@ -199,13 +199,13 @@ const ManageArticles = () => {
                             {/* Thumbnail Upload — Bulletproof native label wrap */}
                             <div>
                                 <label className="block text-xs font-semibold text-gray-500 uppercase mb-1.5 ml-1">Article Thumbnail</label>
-                                <label className="w-full flex flex-col items-center justify-center gap-2 h-44 sm:h-40 border-2 border-dashed border-gray-300 rounded-xl active:border-red-500 active:bg-red-50/20 hover:border-red-400 hover:bg-red-50/10 transition-colors overflow-hidden relative group cursor-pointer">
+                                <label htmlFor="article-thumbnail-upload" className="w-full flex flex-col items-center justify-center gap-2 h-44 sm:h-40 border-2 border-dashed border-gray-300 rounded-xl active:border-red-500 active:bg-red-50/20 hover:border-red-400 hover:bg-red-50/10 transition-colors overflow-hidden relative group cursor-pointer block">
                                     <input
+                                        id="article-thumbnail-upload"
                                         type="file"
-                                        accept="image/*"
-                                        capture="environment"
+                                        accept="image/jpeg, image/png, image/webp"
                                         onChange={(e) => { const f = e.target.files[0]; if (f) { setThumbnail(f); setThumbnailPreview(URL.createObjectURL(f)); } }}
-                                        className="hidden"
+                                        className="sr-only"
                                     />
                                     {thumbnailPreview ? (
                                         <>
