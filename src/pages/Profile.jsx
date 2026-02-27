@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { authApi } from '../api/authApi';
 import toast from 'react-hot-toast';
@@ -10,6 +10,8 @@ const Profile = () => {
     const [editForm, setEditForm] = useState({ fullName: user?.fullName || '', email: user?.email || '' });
     const [passwordForm, setPasswordForm] = useState({ oldPassword: '', newPassword: '' });
     const [loading, setLoading] = useState(false);
+    const coverInputRef = useRef(null);
+    const avatarInputRef = useRef(null);
 
     const handleUpdateProfile = async (e) => {
         e.preventDefault();
@@ -71,37 +73,45 @@ const Profile = () => {
         }
     };
 
-    const inputClass = "w-full px-4 py-2.5 bg-[var(--color-surface)] border border-[var(--color-border)] rounded-xl text-sm text-[var(--color-text-primary)] focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all";
+    const inputClass = "w-full px-4 py-3 bg-[var(--color-surface)] border border-[var(--color-border)] rounded-xl text-base text-[var(--color-text-primary)] focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all";
 
     return (
         <div className="max-w-3xl mx-auto px-4 py-8 animate-fade-in">
             {/* Cover Image */}
-            <div className="relative h-48 md:h-56 rounded-2xl overflow-hidden bg-gradient-to-r from-dark to-dark-tertiary">
+            <div className="relative h-36 sm:h-48 md:h-56 rounded-xl sm:rounded-2xl overflow-hidden bg-gradient-to-r from-slate-700 via-gray-600 to-slate-800">
                 {user?.coverImage && (
                     <img src={user.coverImage} alt="Cover" className="absolute inset-0 w-full h-full object-cover" />
                 )}
-                <label className="absolute bottom-3 right-3 p-2 bg-black/50 backdrop-blur-sm rounded-lg text-white cursor-pointer hover:bg-black/70 transition-colors">
-                    <HiCamera size={18} />
-                    <input type="file" accept="image/*" onChange={handleCoverUpdate} className="hidden" />
-                </label>
+                <input ref={coverInputRef} type="file" accept="image/*" onChange={handleCoverUpdate} className="hidden" />
+                <button
+                    type="button"
+                    onClick={() => coverInputRef.current?.click()}
+                    className="absolute bottom-3 right-3 p-2.5 bg-black/50 backdrop-blur-sm rounded-lg text-white active:bg-black/80 hover:bg-black/70 transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center"
+                >
+                    <HiCamera size={20} />
+                </button>
             </div>
 
             {/* Avatar + Name */}
-            <div className="flex items-end gap-4 -mt-12 ml-4 sm:ml-6">
-                <div className="relative">
+            <div className="flex items-end gap-3 sm:gap-4 -mt-10 sm:-mt-12 ml-3 sm:ml-6 mr-3">
+                <div className="relative shrink-0">
                     <img
                         src={user?.avatar || `https://ui-avatars.com/api/?name=${user?.fullName}&size=96&background=e94560&color=fff`}
                         alt={user?.fullName}
-                        className="w-24 h-24 rounded-full object-cover border-4 border-[var(--color-surface)] shadow-lg"
+                        className="w-20 h-20 sm:w-24 sm:h-24 rounded-full object-cover border-4 border-[var(--color-surface)] shadow-lg"
                     />
-                    <label className="absolute bottom-0 right-0 p-1.5 bg-primary rounded-full text-white cursor-pointer hover:bg-primary-dark transition-colors shadow-md">
+                    <input ref={avatarInputRef} type="file" accept="image/*" onChange={handleAvatarUpdate} className="hidden" />
+                    <button
+                        type="button"
+                        onClick={() => avatarInputRef.current?.click()}
+                        className="absolute bottom-0 right-0 p-2 bg-primary rounded-full text-white active:bg-primary-dark hover:bg-primary-dark transition-colors shadow-md min-w-[32px] min-h-[32px] flex items-center justify-center"
+                    >
                         <HiCamera size={14} />
-                        <input type="file" accept="image/*" onChange={handleAvatarUpdate} className="hidden" />
-                    </label>
+                    </button>
                 </div>
-                <div className="mb-2">
-                    <h1 className="text-xl font-bold text-[var(--color-text-primary)]">{user?.fullName}</h1>
-                    <p className="text-sm text-[var(--color-text-muted)]">@{user?.username} · {user?.role}</p>
+                <div className="mb-1 sm:mb-2 min-w-0">
+                    <h1 className="text-lg sm:text-xl font-bold text-[var(--color-text-primary)] truncate">{user?.fullName}</h1>
+                    <p className="text-xs sm:text-sm text-[var(--color-text-muted)] truncate">@{user?.username} · {user?.role}</p>
                 </div>
             </div>
 
