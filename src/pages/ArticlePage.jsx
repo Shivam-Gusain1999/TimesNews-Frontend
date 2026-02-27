@@ -64,17 +64,17 @@ const ArticlePage = () => {
         new Date(date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
 
     return (
-        <article className="max-w-4xl mx-auto px-4 py-8 animate-fade-in">
+        <article className="max-w-4xl mx-auto px-4 py-6 sm:py-8 animate-fade-in">
             {/* Breadcrumb */}
-            <div className="flex items-center gap-2 text-sm text-[var(--color-text-muted)] mb-6 flex-wrap overflow-hidden">
-                <Link to="/" className="hover:text-primary transition-colors">Home</Link>
-                <span>/</span>
+            <div className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm text-[var(--color-text-muted)] mb-4 sm:mb-6 overflow-hidden">
+                <Link to="/" className="hover:text-primary transition-colors shrink-0">Home</Link>
+                <span className="shrink-0">/</span>
                 {article.category && (
                     <>
-                        <Link to={`/category/${article.category.slug}`} className="hover:text-primary transition-colors">
+                        <Link to={`/category/${article.category.slug}`} className="hover:text-primary transition-colors shrink-0">
                             {article.category.name}
                         </Link>
-                        <span>/</span>
+                        <span className="shrink-0">/</span>
                     </>
                 )}
                 <span className="text-[var(--color-text-secondary)] truncate">{article.title}</span>
@@ -91,7 +91,7 @@ const ArticlePage = () => {
             )}
 
             {/* Title */}
-            <h1 className="text-3xl md:text-4xl font-bold font-[var(--font-serif)] text-[var(--color-text-primary)] leading-tight mb-5">
+            <h1 className="text-xl sm:text-3xl md:text-4xl font-bold font-[var(--font-serif)] text-[var(--color-text-primary)] leading-snug sm:leading-tight mb-4 sm:mb-5">
                 {article.title}
             </h1>
 
@@ -131,7 +131,7 @@ const ArticlePage = () => {
             </div>
 
             {/* Content */}
-            <div className="article-content text-[var(--color-text-primary)] text-base leading-relaxed">
+            <div className="article-content text-[var(--color-text-primary)] text-[15px] sm:text-base leading-relaxed sm:leading-loose">
                 <p>{article.content}</p>
             </div>
 

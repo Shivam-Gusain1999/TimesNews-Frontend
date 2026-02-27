@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { articleApi } from '../../api/articleApi';
 import { categoryApi } from '../../api/categoryApi';
 import toast from 'react-hot-toast';
-import { HiPlus, HiPencil, HiTrash, HiX, HiPhotograph, HiSearch, HiRefresh } from 'react-icons/hi';
+import { HiPlus, HiPencil, HiTrash, HiX, HiPhotograph, HiSearch, HiRefresh, HiUpload } from 'react-icons/hi';
 import Loader from '../../components/Loader';
 
 const ManageArticles = () => {
@@ -22,6 +22,7 @@ const ManageArticles = () => {
     const [thumbnail, setThumbnail] = useState(null);
     const [thumbnailPreview, setThumbnailPreview] = useState(null);
     const [submitting, setSubmitting] = useState(false);
+    const fileInputRef = useRef(null);
 
     // --- DATA FETCHING ---
     const fetchArticles = () => {
@@ -121,7 +122,7 @@ const ManageArticles = () => {
         }
     };
 
-    const inputClass = "w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-red-500/20 focus:border-red-500 transition-all";
+    const inputClass = "w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-base text-gray-900 focus:outline-none focus:ring-2 focus:ring-red-500/20 focus:border-red-500 transition-all";
 
     return (
         <div className="p-4 sm:p-6 space-y-6 max-w-[1600px] mx-auto">
@@ -151,19 +152,19 @@ const ManageArticles = () => {
             {/* --- MODAL (POPUP) --- */}
             {showForm && (
                 <div
-                    className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fade-in"
+                    className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/60 backdrop-blur-sm animate-fade-in"
                     onClick={(e) => e.target === e.currentTarget && resetForm()}
                 >
-                    <div className="bg-white rounded-2xl shadow-2xl w-full max-w-3xl max-h-[90vh] overflow-y-auto animate-scale-up">
+                    <div className="bg-white rounded-t-2xl sm:rounded-2xl shadow-2xl w-full sm:max-w-3xl max-h-[95vh] sm:max-h-[90vh] overflow-y-auto animate-scale-up">
                         {/* Modal Header */}
-                        <div className="sticky top-0 bg-white z-10 flex items-center justify-between p-5 border-b border-gray-100">
-                            <h2 className="text-lg font-bold text-gray-800">{editingId ? 'Edit Article' : 'Create New Article'}</h2>
-                            <button onClick={resetForm} className="p-2 rounded-full hover:bg-gray-100 text-gray-500 transition-colors">
-                                <HiX size={20} />
+                        <div className="sticky top-0 bg-white z-10 flex items-center justify-between p-4 sm:p-5 border-b border-gray-100">
+                            <h2 className="text-base sm:text-lg font-bold text-gray-800">{editingId ? 'Edit Article' : 'Create New Article'}</h2>
+                            <button onClick={resetForm} className="p-2.5 rounded-full hover:bg-gray-100 active:bg-gray-200 text-gray-500 transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center">
+                                <HiX size={22} />
                             </button>
                         </div>
 
-                        <form onSubmit={handleSubmit} className="p-6 space-y-5">
+                        <form onSubmit={handleSubmit} className="p-4 sm:p-6 space-y-5">
                             {/* Title */}
                             <div>
                                 <label className="block text-xs font-semibold text-gray-500 uppercase mb-1.5 ml-1">Title</label>
@@ -173,11 +174,11 @@ const ManageArticles = () => {
                             {/* Content */}
                             <div>
                                 <label className="block text-xs font-semibold text-gray-500 uppercase mb-1.5 ml-1">Content</label>
-                                <textarea required value={formData.content} onChange={(e) => setFormData({ ...formData, content: e.target.value })} rows={8} placeholder="Write your article content here..." className={`${inputClass} resize-none leading-relaxed`} />
+                                <textarea required value={formData.content} onChange={(e) => setFormData({ ...formData, content: e.target.value })} rows={6} placeholder="Write your article content here..." className={`${inputClass} resize-none leading-relaxed`} />
                             </div>
 
                             {/* Category & Status Grid */}
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 <div>
                                     <label className="block text-xs font-semibold text-gray-500 uppercase mb-1.5 ml-1">Category</label>
                                     <select required value={formData.category} onChange={(e) => setFormData({ ...formData, category: e.target.value })} className={inputClass}>
@@ -195,47 +196,61 @@ const ManageArticles = () => {
                                 </div>
                             </div>
 
-                            {/* Thumbnail Upload */}
+                            {/* Thumbnail Upload — Mobile-safe with explicit button */}
                             <div>
                                 <label className="block text-xs font-semibold text-gray-500 uppercase mb-1.5 ml-1">Article Thumbnail</label>
-                                <label className="flex flex-col items-center justify-center gap-2 h-40 border-2 border-dashed border-gray-300 rounded-xl cursor-pointer hover:border-red-400 hover:bg-red-50/10 transition-colors overflow-hidden relative group">
+                                <input
+                                    ref={fileInputRef}
+                                    type="file"
+                                    accept="image/*"
+                                    capture="environment"
+                                    onChange={(e) => { const f = e.target.files[0]; if (f) { setThumbnail(f); setThumbnailPreview(URL.createObjectURL(f)); } }}
+                                    className="hidden"
+                                />
+                                <button
+                                    type="button"
+                                    onClick={() => fileInputRef.current?.click()}
+                                    className="w-full flex flex-col items-center justify-center gap-2 h-44 sm:h-40 border-2 border-dashed border-gray-300 rounded-xl active:border-red-500 active:bg-red-50/20 hover:border-red-400 hover:bg-red-50/10 transition-colors overflow-hidden relative group cursor-pointer"
+                                >
                                     {thumbnailPreview ? (
                                         <>
                                             <img src={thumbnailPreview} alt="" className="w-full h-full object-cover" />
-                                            <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity text-white font-medium">
-                                                Click to Change Image
+                                            <div className="absolute inset-0 bg-black/40 sm:opacity-0 sm:group-hover:opacity-100 opacity-100 flex items-center justify-center transition-opacity">
+                                                <span className="flex items-center gap-2 bg-white/90 text-gray-800 px-4 py-2 rounded-lg text-sm font-semibold shadow-lg">
+                                                    <HiUpload size={16} /> Change Image
+                                                </span>
                                             </div>
                                         </>
                                     ) : (
-                                        <div className="text-center text-gray-400 group-hover:text-red-500 transition-colors">
-                                            <HiPhotograph size={32} className="mx-auto mb-2" />
-                                            <span className="text-sm">Click to upload image</span>
+                                        <div className="text-center text-gray-400 group-hover:text-red-500 active:text-red-600 transition-colors px-4">
+                                            <HiPhotograph size={36} className="mx-auto mb-2" />
+                                            <span className="text-sm font-medium">Tap to upload cover image</span>
+                                            <span className="text-xs text-gray-400 block mt-1">JPG, PNG, WebP • Max 10MB</span>
                                         </div>
                                     )}
-                                    <input type="file" accept="image/*" onChange={(e) => { const f = e.target.files[0]; if (f) { setThumbnail(f); setThumbnailPreview(URL.createObjectURL(f)); } }} className="hidden" />
-                                </label>
+                                </button>
                             </div>
 
                             {/* Featured Checkbox */}
-                            <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg border border-gray-100">
+                            <div className="flex items-center gap-3 p-3.5 bg-gray-50 rounded-xl border border-gray-100 active:bg-gray-100">
                                 <input
                                     type="checkbox"
                                     id="featured"
                                     checked={formData.isFeatured}
                                     onChange={(e) => setFormData({ ...formData, isFeatured: e.target.checked })}
-                                    className="w-5 h-5 rounded border-gray-300 text-red-600 focus:ring-red-500 cursor-pointer"
+                                    className="w-6 h-6 rounded border-gray-300 text-red-600 focus:ring-red-500 cursor-pointer"
                                 />
                                 <label htmlFor="featured" className="text-sm font-medium text-gray-700 cursor-pointer select-none">
                                     Mark as Featured Story
                                 </label>
                             </div>
 
-                            {/* Actions */}
-                            <div className="flex gap-3 pt-2">
-                                <button type="button" onClick={resetForm} className="px-6 py-3 border border-gray-300 rounded-xl text-sm font-medium text-gray-600 hover:bg-gray-50 transition-colors">
+                            {/* Actions — Stacked on mobile */}
+                            <div className="flex flex-col-reverse sm:flex-row gap-3 pt-2 pb-4 sm:pb-2">
+                                <button type="button" onClick={resetForm} className="w-full sm:w-auto px-6 py-3.5 border border-gray-300 rounded-xl text-sm font-medium text-gray-600 hover:bg-gray-50 active:bg-gray-100 transition-colors min-h-[48px]">
                                     Cancel
                                 </button>
-                                <button type="submit" disabled={submitting} className="flex-1 py-3 bg-slate-900 hover:bg-slate-800 text-white font-bold rounded-xl transition-all shadow-lg shadow-slate-900/20 disabled:opacity-70 disabled:cursor-not-allowed">
+                                <button type="submit" disabled={submitting} className="flex-1 py-3.5 bg-slate-900 hover:bg-slate-800 active:bg-slate-700 text-white font-bold rounded-xl transition-all shadow-lg shadow-slate-900/20 disabled:opacity-70 disabled:cursor-not-allowed min-h-[48px]">
                                     {submitting ? 'Processing...' : editingId ? 'Update Article' : 'Publish Article'}
                                 </button>
                             </div>
