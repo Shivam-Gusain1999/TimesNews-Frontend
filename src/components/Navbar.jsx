@@ -27,6 +27,15 @@ const Navbar = () => {
 
     const getCatSlug = (cat) => cat.slug || cat.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
 
+    // Close all menus/popups on ANY route change
+    useEffect(() => {
+        setIsOpen(false);
+        setShowSearch(false);
+        setShowProfileMenu(false);
+        setSuggestions([]);
+        setSearchQuery('');
+    }, [location.pathname]);
+
     useEffect(() => {
         const handleScroll = () => setIsScrolled(window.scrollY > 20);
         window.addEventListener('scroll', handleScroll);
