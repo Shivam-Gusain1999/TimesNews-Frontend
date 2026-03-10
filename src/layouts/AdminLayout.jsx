@@ -28,6 +28,7 @@ const navItems = [
 const AdminLayout = () => {
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const [profileDropdown, setProfileDropdown] = useState(false);
+    const [profileHover, setProfileHover] = useState(false);
     const { user, logout } = useAuth();
     const { isDark, toggleTheme } = useTheme();
     const location = useLocation();
@@ -142,7 +143,10 @@ const AdminLayout = () => {
                         <div className="relative">
                             <button
                                 onClick={() => setProfileDropdown(!profileDropdown)}
-                                className="flex items-center gap-2.5 p-1 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors pl-2 pr-3 border border-transparent dark:border-gray-700"
+                                onMouseEnter={() => setProfileHover(true)}
+                                onMouseLeave={() => setProfileHover(false)}
+                                className="flex items-center gap-2.5 p-1 rounded-full transition-colors pl-2 pr-3 border border-transparent dark:border-gray-700"
+                                style={{ backgroundColor: profileHover ? (isDark ? '#374151' : '#8598beff') : 'transparent' }}
                             >
                                 <img
                                     src={user?.avatar || `https://ui-avatars.com/api/?name=${user?.fullName}&size=32&background=e94560&color=fff`}
@@ -166,7 +170,7 @@ const AdminLayout = () => {
                                                 className="w-16 h-16 rounded-full object-cover mx-auto mb-2 ring-4 ring-white dark:ring-gray-800 shadow-sm"
                                             />
                                             <p className="text-sm font-bold text-gray-900 dark:text-white truncate">{user?.fullName}</p>
-                                            <p className="text-xs text-gray-500 dark:text-gray-400 truncate mt-0.5">{user?.email}</p>
+                                            <p className="text-xs !text-white dark:text-gray-400 truncate mt-0.5">{user?.email}</p>
                                         </div>
                                         <div className="p-2">
                                             <button
