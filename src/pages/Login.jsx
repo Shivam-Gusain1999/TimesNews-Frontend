@@ -80,8 +80,8 @@ const Login = () => {
                                     value={formData.email}
                                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                                     placeholder="you@example.com"
-                                    // MAROON CHANGE: focus ring and border darkened to red-700
-                                    className="w-full pl-11 pr-4 py-3 bg-gray-50 dark:bg-[var(--color-surface)] border border-gray-200 dark:border-[var(--color-border)] rounded-xl text-base text-gray-900 dark:text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-red-700/20 focus:border-red-700 transition-all"
+                                    // FIX: Removed dark:bg-[...] aur dark:text-white taaki text hamesha visible rahe
+                                    className="w-full pl-11 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-base text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-red-700/20 focus:border-red-700 transition-all"
                                 />
                             </div>
                         </div>
@@ -96,8 +96,8 @@ const Login = () => {
                                     value={formData.password}
                                     onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                                     placeholder="Enter your password"
-                                    // MAROON CHANGE: focus ring and border darkened to red-700
-                                    className="w-full pl-11 pr-11 py-3 bg-gray-50 dark:bg-[var(--color-surface)] border border-gray-200 dark:border-[var(--color-border)] rounded-xl text-base text-gray-900 dark:text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-red-700/20 focus:border-red-700 transition-all"
+                                    // FIX: Removed dark:bg-[...] aur dark:text-white
+                                    className="w-full pl-11 pr-11 py-3 bg-gray-50 border border-gray-200 rounded-xl text-base text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-red-700/20 focus:border-red-700 transition-all"
                                 />
                                 <button
                                     type="button"

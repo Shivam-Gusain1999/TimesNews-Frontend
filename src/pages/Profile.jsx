@@ -102,7 +102,7 @@ const Profile = () => {
                     </label>
                 </div>
                 <div className="mb-1 sm:mb-2 min-w-0">
-                    <h1 className="text-lg sm:text-xl font-bold text-[var(--color-text-primary)] truncate">{user?.fullName}</h1>
+                    <h1 className="text-lg mt-15 sm:text-xl font-bold text-[var(--color-text-primary)] truncate">{user?.fullName}</h1>
                     <p className="text-xs sm:text-sm text-[var(--color-text-muted)] truncate">@{user?.username} · {user?.role}</p>
                 </div>
             </div>
