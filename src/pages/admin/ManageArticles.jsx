@@ -199,18 +199,18 @@ const ManageArticles = () => {
                             {/* Thumbnail Upload — Bulletproof native label wrap */}
                             <div>
                                 <label className="block text-xs font-semibold text-gray-500 uppercase mb-1.5 ml-1">Article Thumbnail</label>
-                                <label htmlFor="article-thumbnail-upload" className="w-full flex flex-col items-center justify-center gap-2 h-44 sm:h-40 border-2 border-dashed border-gray-300 rounded-xl active:border-red-500 active:bg-red-50/20 hover:border-red-400 hover:bg-red-50/10 transition-colors overflow-hidden relative group cursor-pointer block">
+                                <label htmlFor="article-thumbnail-upload" className="w-full flex flex-col items-center justify-center gap-2 h-44 sm:h-40 border-2 border-dashed border-gray-300 rounded-xl active:border-red-500 active:bg-red-50/20 hover:border-red-400 hover:bg-red-50/10 transition-colors overflow-hidden relative group cursor-pointer">
                                     <input
                                         id="article-thumbnail-upload"
                                         type="file"
-                                        accept="image/jpeg, image/png, image/webp"
-                                        onChange={(e) => { const f = e.target.files[0]; if (f) { setThumbnail(f); setThumbnailPreview(URL.createObjectURL(f)); } }}
-                                        className="sr-only"
+                                        accept="image/*, image/jpeg, image/png, image/webp, image/heic"
+                                        onChange={(e) => { const f = e.target.files[0]; if (f) { setThumbnail(f); setThumbnailPreview(URL.createObjectURL(f)); e.target.value = null; } }}
+                                        className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-20"
                                     />
                                     {thumbnailPreview ? (
                                         <>
-                                            <img src={thumbnailPreview} alt="Preview" className="w-full h-full object-cover" />
-                                            <div className="absolute inset-0 bg-black/40 sm:opacity-0 sm:group-hover:opacity-100 opacity-100 flex items-center justify-center transition-opacity">
+                                            <img src={thumbnailPreview} alt="Preview" className="w-full h-full object-cover relative z-0" />
+                                            <div className="absolute inset-0 bg-black/40 sm:opacity-0 sm:group-hover:opacity-100 opacity-100 flex items-center justify-center transition-opacity z-10 pointer-events-none">
                                                 <span className="flex items-center gap-2 bg-white/90 text-gray-800 px-4 py-2 rounded-lg text-sm font-semibold shadow-lg">
                                                     <HiUpload size={16} /> Change Image
                                                 </span>
