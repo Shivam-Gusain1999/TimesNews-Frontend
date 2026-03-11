@@ -83,7 +83,7 @@ const Profile = () => {
                     <img src={user.coverImage} alt="Cover" className="absolute inset-0 w-full h-full object-cover" />
                 )}
                 <label htmlFor="cover-upload" className="absolute bottom-3 right-3 p-2.5 bg-black/50 backdrop-blur-sm rounded-lg text-white active:bg-black/80 hover:bg-black/70 transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center cursor-pointer">
-                    <input id="cover-upload" type="file" accept="image/jpeg, image/png, image/webp" onChange={handleCoverUpdate} className="sr-only" />
+                    <input id="cover-upload" type="file" accept="image/jpeg, image/png, image/webp, image/heic" onChange={handleCoverUpdate} className="sr-only" />
                     <HiCamera size={20} />
                 </label>
             </div>
@@ -97,7 +97,7 @@ const Profile = () => {
                         className="w-20 h-20 sm:w-24 sm:h-24 rounded-full object-cover border-4 border-[var(--color-surface)] shadow-lg"
                     />
                     <label htmlFor="avatar-upload" className="absolute bottom-0 right-0 p-2 bg-primary rounded-full text-white active:bg-primary-dark hover:bg-primary-dark transition-colors shadow-md min-w-[32px] min-h-[32px] flex items-center justify-center cursor-pointer">
-                        <input id="avatar-upload" type="file" accept="image/jpeg, image/png, image/webp" onChange={handleAvatarUpdate} className="sr-only" />
+                        <input id="avatar-upload" type="file" accept="image/jpeg, image/png, image/webp, image/heic" onChange={handleAvatarUpdate} className="sr-only" />
                         <HiCamera size={14} />
                     </label>
                 </div>

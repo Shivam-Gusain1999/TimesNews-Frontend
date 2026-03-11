@@ -220,7 +220,7 @@ const ManageArticles = () => {
                                         <div className="text-center text-gray-400 group-hover:text-red-500 active:text-red-600 transition-colors px-4">
                                             <HiPhotograph size={36} className="mx-auto mb-2" />
                                             <span className="text-sm font-medium">Tap to upload cover image</span>
-                                            <span className="text-xs text-gray-400 block mt-1">JPG, PNG, WebP • Max 10MB</span>
+                                            <span className="text-xs text-gray-400 block mt-1">JPG, PNG, WebP, HEIC • Max 20MB</span>
                                         </div>
                                     )}
                                 </label>
